@@ -8,6 +8,7 @@ import ConcessionStage from '@/components/management/formManagement/ConcessionSt
 import JustificationStage from '@/components/management/formManagement/JustificationStage'
 import ClosingStage from '@/components/management/formManagement/ClosingStage'
 import { CardContent } from '@/components/ui/card'
+import { formatDate } from '@/lib/utils'
 
 export default function Management () {
   const { id } = useParams()
@@ -28,11 +29,25 @@ export default function Management () {
           <AccordionItem value='item-2'>
             <AccordionTrigger className='px-3 bg-gradient-to-r  from-neutral-50  from-2% bg-white via-70% to-blue-700 to-90%'>ETAPA DE SOLICITUD</AccordionTrigger>
             <AccordionContent>
+              <h2 className='font-black'>Convocatoria:</h2>
               <p>{gestion?.convocatoria}</p>
+              <h2 className='font-black'>Financiador:</h2>
               <p>{gestion?.financiador}</p>
-              <p>{gestion?.numeroExpediente}</p>
-              <p>{gestion?.numeroTramite}</p>
+              <h2 className='font-black'>Proyecto:</h2>
+              <p>{gestion?.proyecto}</p>
+              <h2 className='font-black'>Codigo-Interno</h2>
+              <p>{gestion?.codigoInterno}</p>
+              <h2 className='font-black'>Responsable:</h2>
               <p>{gestion?.responsable}</p>
+              <h2 className='font-black'>Fecha-Entrega-Propuesta</h2>
+              <p>{gestion?.fechaPropuesta
+                ? formatDate(gestion?.fechaPropuesta)
+                : 'N/A'}
+              </p>
+              <h2 className='font-black'> Numero-Tramite</h2>
+              <p>{gestion?.numeroTramite}</p>
+              <h2 className='font-black'>Numero-Expediente</h2>
+              <p>{gestion?.numeroExpediente}</p>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -40,7 +55,7 @@ export default function Management () {
           <AccordionItem value='item-2'>
             <AccordionTrigger className='px-3  bg-gradient-to-r  from-neutral-50  from-2% bg-white via-70% to-red-500 to-90%'>ETAPA DE NEGOCIACION</AccordionTrigger>
             <AccordionContent>
-              <NegotationStage id={id} />
+              <NegotationStage id={id || ''} />
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -48,7 +63,7 @@ export default function Management () {
           <AccordionItem value='item-2'>
             <AccordionTrigger className='px-3 bg-gradient-to-r  from-neutral-50  from-2% bg-white via-70% to-purple-600 to-90%'>ETAPA DE OTORGAMIENTO</AccordionTrigger>
             <AccordionContent>
-              <ConcessionStage id={id} />
+              <ConcessionStage id={id || ''} />
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -56,7 +71,7 @@ export default function Management () {
           <AccordionItem value='item-2'>
             <AccordionTrigger className=' px-3 bg-otorgamiento bg-gradient-to-r  from-neutral-50  from-2% bg-white via-70% to-cyan-400 to-90%'>ETAPA DE JUSTIFICACIÓN</AccordionTrigger>
             <AccordionContent>
-              <JustificationStage id={id} />
+              <JustificationStage id={id || ''} />
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -64,7 +79,7 @@ export default function Management () {
           <AccordionItem value='item-2'>
             <AccordionTrigger className='px-3 bg-gradient-to-r from-neutral-50    from-2% bg-white via-70% to-green-500 to-90%'>ETAPA DE CIERRE</AccordionTrigger>
             <AccordionContent>
-              <ClosingStage id={id} />
+              <ClosingStage id={id || ''} />
             </AccordionContent>
           </AccordionItem>
         </Accordion>

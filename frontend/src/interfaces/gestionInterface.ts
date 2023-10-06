@@ -48,6 +48,7 @@ interface EtapaResolucion {
   convocatoria: string;
   financiador: string;
   proyecto: string;
+  codigoInterno?:string;
   responsable: string;
   fechaPropuesta: Date;
   numeroTramite: string;

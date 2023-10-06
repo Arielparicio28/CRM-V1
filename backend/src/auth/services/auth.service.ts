@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { TokenPayload } from '../../schemas/token.model';
-import { User } from '../../schemas/users.schema';
+import { TokenPayload } from '../../user/schemas/token.model';
+import { User } from '../../user/schemas/users.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 @Injectable()

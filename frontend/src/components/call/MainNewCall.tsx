@@ -29,21 +29,23 @@ import { toast } from '../ui/use-toast'
 import { Separator } from '../ui/separator'
 
 const schema = z.object({
-  titulo: z.string().min(3).max(50).optional(),
-  tematica: z.string().min(3).max(50).optional(),
-  entidadConvocante: z.string().min(3).max(50).optional(),
-  departamentoConvocante: z.string().min(3).max(50).optional(),
+ /*  _id: z.string().optional(), */
+  titulo: z.string().min(3).max(50),
+  tematica: z.string().min(3).max(50),
+  entidadConvocante: z.string().min(3).max(50),
+  departamentoConvocante: z.string().min(3).max(50),
   publicacionOficial: z.string().url().optional(),
   convocatoriaEnlace: z.string().url().optional(),
-  trabajoLineas: z.string().min(10).optional(),
+  trabajoLineas: z.string().min(10),
   dirigidoEntidades: z.string().min(3).max(50),
   fechaApertura: z.date(),
   fechaCierre: z.date(),
   fechaResolucion: z.date(),
-  periodoEjecucion: z.coerce.number().min(1).optional(),
-  auditoria: z.string().optional(),
-  presupuesto: z.coerce.number().min(0).optional(),
-  otraInformacion: z.string().optional(),
+  fechaJustificacion: z.date(),
+  periodoEjecucion: z.coerce.number().min(1),
+  auditoria: z.boolean().optional(),
+  presupuesto: z.coerce.number().min(0),
+  otraInformacion: z.string(),
   memoriaTecnica: z.instanceof(File).optional(),
   modeloPresupuesto: z.instanceof(File).optional(),
   formularioSolicitud: z.instanceof(File).optional(),
@@ -273,7 +275,28 @@ function MainNewCall () {
                     </FormItem>
                   )}
                 />
-
+                <FormField
+                  control={form.control}
+                  name='fechaJustificacion'
+                  render={({ field }) => (
+                    <FormItem>
+                      <div className='flex flex-col space-y-2 mt-5'>
+                        <FormLabel className='text-sm text-gray-600'>Fecha limite de  Justificación </FormLabel>
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <FormControl>
+                              <DatePicker
+                                title=''
+                                {...field}
+                              />
+                            </FormControl>
+                          </PopoverTrigger>
+                        </Popover>
+                        <FormMessage />
+                      </div>
+                    </FormItem>
+                  )}
+                />
                 <FormField
                   control={form.control}
                   name='periodoEjecucion'

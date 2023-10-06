@@ -35,7 +35,7 @@ const statuses: Status[] = [
   }
 ]
 interface ProjectStatusProps {
-  onChange: (selectedStatus: string) => void; // Especifica el tipo de onChange
+  onChange: (selectedStatus: string) => void; // Especifico el tipo de onChange que pude ser de cualquier tipo
 }
 
 export function ProjectStatus ({ onChange }: ProjectStatusProps) {
@@ -48,7 +48,7 @@ export function ProjectStatus ({ onChange }: ProjectStatusProps) {
       statuses.find((status) => status.value === value) || null
     )
     setOpen(false)
-    // Llamar a la función de cambio con el valor enum
+    // Llamo a la función de cambio con el valor enum
     onChange(value)
   }
 

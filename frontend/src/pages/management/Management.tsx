@@ -7,6 +7,7 @@ import NegotationStage from '@/components/management/formManagement/NegotiationS
 import ConcessionStage from '@/components/management/formManagement/ConcessionStage'
 import JustificationStage from '@/components/management/formManagement/JustificationStage'
 import ClosingStage from '@/components/management/formManagement/ClosingStage'
+import { CardContent } from '@/components/ui/card'
 
 export default function Management () {
   const { id } = useParams()
@@ -22,50 +23,52 @@ export default function Management () {
 
   return (
     <>
-      <Accordion className='m-2 w-full' type='single' collapsible>
-        <AccordionItem value='item-2'>
-          <AccordionTrigger className='px-3'>ETAPA DE SOLICITUD</AccordionTrigger>
-          <AccordionContent>
-            <p>{gestion?.convocatoria}</p>
-            <p>{gestion?.financiador}</p>
-            <p>{gestion?.numeroExpediente}</p>
-            <p>{gestion?.numeroTramite}</p>
-            <p>{gestion?.responsable}</p>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-      <Accordion className='m-2 w-full' type='single' collapsible>
-        <AccordionItem value='item-2'>
-          <AccordionTrigger className='px-3'>ETAPA DE NEGOCIACION</AccordionTrigger>
-          <AccordionContent>
-            <NegotationStage id={id} />
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-      <Accordion className='m-2 w-full' type='single' collapsible>
-        <AccordionItem value='item-2'>
-          <AccordionTrigger className='px-3'>ETAPA DE OTORGAMIENTO</AccordionTrigger>
-          <AccordionContent>
-            <ConcessionStage id={id} />
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-      <Accordion className='m-2 w-full' type='single' collapsible>
-        <AccordionItem value='item-2'>
-          <AccordionTrigger className='px-3'>ETAPA DE JUSTIFICACIÓN</AccordionTrigger>
-          <AccordionContent>
-            <JustificationStage id={id} />
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-      <Accordion className='m-2 w-full' type='single' collapsible>
-        <AccordionItem value='item-2'>
-          <AccordionTrigger className='px-3'>ETAPA DE CIERRE</AccordionTrigger>
-          <AccordionContent>
-            <ClosingStage id={id} />
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+      <CardContent className='p-0 flex flex-wrap '>
+        <Accordion className='m-2 w-full mt-8' type='single' collapsible>
+          <AccordionItem value='item-2'>
+            <AccordionTrigger className='px-3 bg-gradient-to-r  from-neutral-50  from-2% bg-white via-70% to-blue-700 to-90%'>ETAPA DE SOLICITUD</AccordionTrigger>
+            <AccordionContent>
+              <p>{gestion?.convocatoria}</p>
+              <p>{gestion?.financiador}</p>
+              <p>{gestion?.numeroExpediente}</p>
+              <p>{gestion?.numeroTramite}</p>
+              <p>{gestion?.responsable}</p>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+        <Accordion className='m-2 w-full' type='single' collapsible>
+          <AccordionItem value='item-2'>
+            <AccordionTrigger className='px-3  bg-gradient-to-r  from-neutral-50  from-2% bg-white via-70% to-red-500 to-90%'>ETAPA DE NEGOCIACION</AccordionTrigger>
+            <AccordionContent>
+              <NegotationStage id={id} />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+        <Accordion className='m-2 w-full' type='single' collapsible>
+          <AccordionItem value='item-2'>
+            <AccordionTrigger className='px-3 bg-gradient-to-r  from-neutral-50  from-2% bg-white via-70% to-purple-600 to-90%'>ETAPA DE OTORGAMIENTO</AccordionTrigger>
+            <AccordionContent>
+              <ConcessionStage id={id} />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+        <Accordion className='m-2 w-full' type='single' collapsible>
+          <AccordionItem value='item-2'>
+            <AccordionTrigger className=' px-3 bg-otorgamiento bg-gradient-to-r  from-neutral-50  from-2% bg-white via-70% to-cyan-400 to-90%'>ETAPA DE JUSTIFICACIÓN</AccordionTrigger>
+            <AccordionContent>
+              <JustificationStage id={id} />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+        <Accordion className='m-2 w-full' type='single' collapsible>
+          <AccordionItem value='item-2'>
+            <AccordionTrigger className='px-3 bg-gradient-to-r from-neutral-50    from-2% bg-white via-70% to-green-500 to-90%'>ETAPA DE CIERRE</AccordionTrigger>
+            <AccordionContent>
+              <ClosingStage id={id} />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </CardContent>
     </>
   )
 }

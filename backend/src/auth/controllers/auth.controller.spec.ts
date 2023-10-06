@@ -3,7 +3,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../../user/user.service';
 import { getModelToken } from '@nestjs/mongoose';
-import { User } from '../../schemas/users.schema';
+import { User } from '../../user/schemas/users.schema';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 
 describe('AuthController', () => {

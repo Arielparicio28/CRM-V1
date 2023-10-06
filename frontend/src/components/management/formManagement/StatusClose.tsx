@@ -24,13 +24,23 @@ const statuses: Status[] = [
     label: 'Cerrado'
   }
 ]
+interface ClosingStatus {
+  onChange: (selectedStatus:string) => void
+}
 
-export function StatusClose () {
+export function StatusClose ({ onChange }: ClosingStatus) {
   const [open, setOpen] = React.useState(false)
   const [selectedStatus, setSelectedStatus] = React.useState<Status | null>(
     null
   )
-
+  const handleStatusChange = (value:string) => {
+    setSelectedStatus(
+      statuses.find((status) => status.value === value) || null
+    )
+    setOpen(false)
+    // Llamo a la función de cambio con el valor enum
+    onChange(value)
+  }
   return (
     <div className='flex items-center space-x-4'>
       <Popover open={open} onOpenChange={setOpen}>
@@ -46,13 +56,8 @@ export function StatusClose () {
                 {statuses.map((status) => (
                   <CommandItem
                     key={status.value}
-                    onSelect={(value) => {
-                      setSelectedStatus(
-                        statuses.find((priority) => priority.value === value) ||
-                                                null
-                      )
-                      setOpen(false)
-                    }}
+                    onSelect={handleStatusChange}
+                    value={status.value}
                   >
                     {status.label}
                   </CommandItem>

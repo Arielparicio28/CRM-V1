@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { getModelToken } from '@nestjs/mongoose';
-import { User } from '../../schemas/users.schema';
+import { User } from '../../user/schemas/users.schema';
 import { Model } from 'mongoose';
 import { JwtService } from '@nestjs/jwt';
 

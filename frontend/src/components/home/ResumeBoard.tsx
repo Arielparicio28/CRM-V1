@@ -52,7 +52,7 @@ const ResumeBoard: React.FC = () => {
 
         const convocatoriasCierre: Convocatoria[] = convocatoriasCierreResponse.gestiones.filter(
           (convocatoria: Convocatoria) =>
-            convocatoria.etapaCierre && convocatoria.etapaCierre.estadoResolucion === 'Cerrado'
+            convocatoria.etapaCierre && convocatoria.etapaCierre.estadoResolucion === 'cerrado'
         )
 
         // Establecer el estado con la cantidad de convocatorias cerradas

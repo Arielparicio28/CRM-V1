@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { UnauthorizedException } from '@nestjs/common';
 import { LocalStrategy } from './local.strategy';
 import { AuthService } from '../services/auth.service';
-import { User } from '../../schemas/users.schema';
+import { User } from '../../user/schemas/users.schema';
 import { getModelToken } from '@nestjs/mongoose';
 import { JwtService } from '@nestjs/jwt';
 

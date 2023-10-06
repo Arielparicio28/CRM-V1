@@ -34,7 +34,9 @@ function ClosingStage ({ id }: { id: string }) {
   const form = useForm<ClosingValues>({
     resolver: zodResolver(closingSchema)
   })
-
+  const handleStatusChange = (selectedStatus:string) => {
+    form.setValue('estadoResolucion', selectedStatus)
+  }
   async function onSubmit (data: ClosingValues) {
     try {
       const dataCierre = {
@@ -88,7 +90,7 @@ function ClosingStage ({ id }: { id: string }) {
                   <div className='my-2'>
                     <FormLabel className='mb-2'>Estado de resolución</FormLabel>
                     <FormControl>
-                      <StatusClose />
+                      <StatusClose onChange={handleStatusChange} />
                     </FormControl>
                     <FormMessage />
                   </div>

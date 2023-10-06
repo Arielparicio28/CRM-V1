@@ -34,12 +34,23 @@ const statuses: Status[] = [
     label: 'Otorgado'
   }
 ]
+interface ProjectStatusProps {
+  onChange: (selectedStatus: string) => void; // Especifica el tipo de onChange
+}
 
-export function ProjectStatus () {
+export function ProjectStatus ({ onChange }: ProjectStatusProps) {
   const [open, setOpen] = React.useState(false)
   const [selectedStatus, setSelectedStatus] = React.useState<Status | null>(
     null
   )
+  const handleStatusChange = (value:string) => {
+    setSelectedStatus(
+      statuses.find((status) => status.value === value) || null
+    )
+    setOpen(false)
+    // Llamar a la función de cambio con el valor enum
+    onChange(value)
+  }
 
   return (
     <div className='flex items-center space-x-4'>
@@ -58,13 +69,8 @@ export function ProjectStatus () {
                 {statuses.map((status) => (
                   <CommandItem
                     key={status.value}
-                    onSelect={(value) => {
-                      setSelectedStatus(
-                        statuses.find((priority) => priority.value === value) ||
-                                                null
-                      )
-                      setOpen(false)
-                    }}
+                    onSelect={handleStatusChange}
+                    value={status.value}
                   >
                     {status.label}
                   </CommandItem>

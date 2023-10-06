@@ -16,25 +16,42 @@ import {
 } from '@/components/ui/form'
 import { CardContent } from '@/components/ui/card'
 import { StatusClose } from '@/components/management/formManagement/StatusClose'
+import { AxiosResponse } from 'axios'
+import { updateGestion } from '@/services/gestion'
 
 const closingSchema = z.object({
-  aprobacionoficial: z.date().optional(),
-  estadoderesolucion: z.string().optional(),
-  pagofinal: z.date().optional(),
-  totalrecibido: z.string().optional(),
-  porcentajerecibido: z.string().optional(),
-  cierre: z.string().optional()
+  fechaAprobacionOficial: z.date(),
+  estadoResolucion: z.string().optional(),
+  fechaRecepcionPagoFinal: z.date(),
+  montoTotalRecibido: z.string().optional(),
+  ultimoPagoPorcentaje: z.string().optional(),
+  documentoCierre: z.string().optional()
 })
 
 type ClosingValues = z.infer<typeof closingSchema>;
 
-function ClosingStage () {
+function ClosingStage ({ id }: { id: string }) {
   const form = useForm<ClosingValues>({
     resolver: zodResolver(closingSchema)
   })
 
-  function onSubmit (data: ClosingValues) {
-    console.log(data)
+  async function onSubmit (data: ClosingValues) {
+    try {
+      const dataCierre = {
+        etapaCierre: {
+          fechaAprobacionOficial: data.fechaAprobacionOficial,
+          estadoResolucion: data.estadoResolucion,
+          fechaRecepcionPagoFinal: data.fechaRecepcionPagoFinal,
+          montoTotalRecibido: data.montoTotalRecibido,
+          ultimoPagoPorcentaje: data.ultimoPagoPorcentaje,
+          documentoCierre: data.documentoCierre
+        }
+      }
+      const response: AxiosResponse = await updateGestion(id, dataCierre)
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
     toast({
       title: '¡Genial!',
       description: 'Acaba de actualizar su formulario.'
@@ -47,7 +64,7 @@ function ClosingStage () {
           <CardContent>
             <FormField
               control={form.control}
-              name='aprobacionoficial'
+              name='fechaAprobacionOficial'
               render={({ field }) => (
                 <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
                   <div className='my-2'>
@@ -65,8 +82,8 @@ function ClosingStage () {
             />
             <FormField
               control={form.control}
-              name='estadoderesolucion'
-              render={({ field }) => (
+              name='estadoResolucion'
+              render={() => (
                 <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
                   <div className='my-2'>
                     <FormLabel className='mb-2'>Estado de resolución</FormLabel>
@@ -81,7 +98,7 @@ function ClosingStage () {
             <Separator className='my-5' />
             <FormField
               control={form.control}
-              name='pagofinal'
+              name='fechaRecepcionPagoFinal'
               render={({ field }) => (
                 <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
                   <div className='my-2'>
@@ -99,7 +116,7 @@ function ClosingStage () {
             />
             <FormField
               control={form.control}
-              name='totalrecibido'
+              name='montoTotalRecibido'
               render={({ field }) => (
                 <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
                   <div className='my-2'>
@@ -118,7 +135,7 @@ function ClosingStage () {
             />
             <FormField
               control={form.control}
-              name='porcentajerecibido'
+              name='ultimoPagoPorcentaje'
               render={({ field }) => (
                 <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
                   <div className='my-2'>
@@ -138,7 +155,7 @@ function ClosingStage () {
             <Separator className='my-5' />
             <FormField
               control={form.control}
-              name='cierre'
+              name='documentoCierre'
               shouldUnregister
               render={({ field }) => (
                 <FormItem className='w-1/2 px-4 mb-4'>

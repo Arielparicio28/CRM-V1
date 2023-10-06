@@ -10,7 +10,7 @@ interface EtapaResolucion {
 
   interface EtapaOtorgamiento {
     fechaResolucionFinal: Date;
-    estadoSolicitud?: boolean | null;
+    estadoSolicitud?:string;
     montoConcedido: string;
     fechaPrimerDesembolso: Date;
     fechaRecepcionDesembolso: Date;
@@ -36,36 +36,27 @@ interface EtapaResolucion {
 
   interface EtapaCierre {
     fechaAprobacionOficial: Date;
-    estadoResolucion?: string | null;
+    estadoResolucion?: string;
     fechaRecepcionPagoFinal: Date;
-    montoTotalRecibido: string;
-    ultimoPagoPorcentaje: string;
-    documentoCierre: string;
+    montoTotalRecibido: number;
+    ultimoPagoPorcentaje:number;
+    documentoCierre?: string;
   }
-interface EtapaSolicitud {
-  fechaPropuesta?: Date;
-  numeroTramite?: string;
-  numeroExpediente?: string;
- reciboOficial?: string;
-}
 
   interface GestionConvocatoria {
-    _id:string ;
-    convocatoria: string;
-    financiador: string;
-    proyecto: string;
-    responsable: string;
-    fechaPropuesta: Date;
-    numeroTramite: string;
-    numeroExpediente: string;
-   reciboOficial?: string;
-   etapaResolucion: EtapaResolucion[];
-/* 
-    codigoInterno?: string;
-    etapaResolucion: EtapaResolucion[];
-    etapaOtorgamiento: EtapaOtorgamiento[];
-    etapaJustificacion: EtapaJustificacion[];
-    etapaCierre: EtapaCierre[]; */
+  _id?:string ;
+  convocatoria: string;
+  financiador: string;
+  proyecto: string;
+  responsable: string;
+  fechaPropuesta: Date;
+  numeroTramite: string;
+  numeroExpediente: string;
+  reciboOficial?: string;
+  etapaResolucion: EtapaResolucion[];
+  etapaOtorgamiento: EtapaOtorgamiento[];
+  etapaJustificacion: EtapaJustificacion[];
+  etapaCierre: EtapaCierre[]
   }
 
 export default GestionConvocatoria

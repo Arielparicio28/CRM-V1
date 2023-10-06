@@ -1,9 +1,10 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsBoolean, IsDate, IsEnum, IsNumber, IsString } from "class-validator";
+import {  IsDate, IsEnum, IsNumber, IsString } from "class-validator";
 
 enum EstadoSolicitud {
-    aprobada = "aprobada",
-    denegada = "denegada"
+    APROBADO = "aprobado",
+    DENEGADO = "denegado",
+    OTORGADO= "otorgado"
 }
 
 export class EtapaOtorgamientoDto {
@@ -13,8 +14,8 @@ fechaResolucionFinal:Date;
 
 @ApiProperty({example:"aprobada/denegada"})
 @IsEnum(EstadoSolicitud)
-@IsBoolean()
-estadoSolicitud:boolean; 
+@IsString()
+estadoSolicitud:string; 
 
 @ApiProperty({example:"20000"})
 @IsNumber()

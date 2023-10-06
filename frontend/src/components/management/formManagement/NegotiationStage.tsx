@@ -57,7 +57,7 @@ function NegotationStage ({ id }: { id: string }) {
     }
     toast({
       title: '¡Genial!',
-      description: 'Acaba de actualizar su formulario.'
+      description: 'Acaba de actualizar su formulario en Etapa de Negociación'
     })
   }
   return (

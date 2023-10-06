@@ -30,7 +30,7 @@ export class GestionConvocatoriaService {
     const codigoConFecha = `${codigoEtapa}${autoGenerateCode()}`;
     const createdGestion = await this.ProyectoModel.findOne({proyectoNombre:createGestionConvocatoriaDto["proyecto"]}).exec()
     if(!createdGestion){
-      throw new BadRequestException(`No hay proyectos disponibles para gestionar: ${createGestionConvocatoriaDto ['proyecto']}`)
+      throw new BadRequestException(`No hay proyectos disponibles para gestionar: ${createGestionConvocatoriaDto.proyecto}`)
     }
     const createdConvocatoria = await this.ConvocatoriaModel.findOne({entidadConvocante:createGestionConvocatoriaDto["financiador"]})
     if(!createdConvocatoria){
@@ -48,6 +48,10 @@ export class GestionConvocatoriaService {
       proyecto: createGestionConvocatoriaDto.proyecto,
       codigoInterno: codigoConFecha,
       responsable:createGestionConvocatoriaDto.responsable,
+      fechaPropuesta:createGestionConvocatoriaDto.fechaPropuesta,
+      numeroTramite:createGestionConvocatoriaDto.numeroTramite,
+      numeroExpediente:createGestionConvocatoriaDto.numeroExpediente,
+      reciboOficial:createGestionConvocatoriaDto.reciboOficial
     });
 
     return etapa.save();

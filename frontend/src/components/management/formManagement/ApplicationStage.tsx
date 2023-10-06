@@ -12,15 +12,16 @@ import { AxiosResponse } from 'axios'
 import { postGestion } from '@/services/gestion'
 import { SearchProjects } from '@/components/management/formManagement/SearchProjects'
 import { toast } from '@/components/ui/use-toast'
+import { Searchconvocatoria } from './SearchConvocatoria'
 
 const applicationStage = z.object({
   proyecto: z.string().optional(),
   responsable: z.string(),
-  convocatoria: z.string(),
+  convocatoria: z.string().optional(),
   financiador: z.string(),
-  fechaPropuesta: z.date().optional(),
-  numeroTramite: z.string().optional(),
-  numeroExpediente: z.string().optional(),
+  fechaPropuesta: z.date(),
+  numeroTramite: z.string(),
+  numeroExpediente: z.string(),
   reciboOficial: z.instanceof(File).optional()
 })
 
@@ -31,15 +32,17 @@ function ApplicationStage () {
     resolver: zodResolver(applicationStage)
   })
   const [selectedProject, setSelectedProject] = useState<string>()
-
+  const [selectedConvocatoria, setSelectedConvocatoria] = useState<string>()
   async function onSubmit (data: AccountFormValues) {
     try {
       if (!selectedProject) {
         console.error('No project selected.')
       }
-      console.log('Selected Project:', selectedProject)
+      if (!selectedConvocatoria) {
+        console.log('No selecciono correctamente la convocatoria')
+      }
+      data.convocatoria = selectedConvocatoria || ''
       data.proyecto = selectedProject || ''
-      console.log('Data:', data)
       const response: AxiosResponse = await postGestion(data)
       console.log(response)
     } catch (error) {
@@ -76,16 +79,12 @@ function ApplicationStage () {
             <FormField
               control={form.control}
               name='convocatoria'
-              render={({ field }) => (
+              render={() => (
                 <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
                   <div className='flex flex-col space-y-2 mt-5'>
                     <FormLabel className='text-sm text-gray-600'>Convocatoria</FormLabel>
                     <FormControl>
-                      <Input
-                        type='text'
-                        placeholder='convocatoria'
-                        {...field}
-                      />
+                      <Searchconvocatoria onSelectConvocatoria={setSelectedConvocatoria} />
                     </FormControl>
                     <FormMessage />
                   </div>

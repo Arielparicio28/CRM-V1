@@ -62,6 +62,6 @@ seguimientoInformes:string;
 
 @ApiProperty({example:"PDF"})
 @IsString()
-adjuntarResolucionOtorgamiento:string; 
+adjuntarResolucionOtorgamiento?:string; 
 
 }

@@ -19,10 +19,6 @@ estado:Estados
 @IsString()
 responsable:string
 
-@ApiProperty({ example: "Etapa Solicitud" })
-@IsArray()
-etapaSolicitud: EtapaSolicitudDto
-
   @ApiProperty({ example: "Etapa Resolucion" })
   @IsArray()
   etapaResolucion: EtapaResolucionDto;

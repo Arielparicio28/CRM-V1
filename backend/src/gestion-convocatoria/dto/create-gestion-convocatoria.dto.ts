@@ -1,12 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsArray,IsDate,IsEnum,IsNumber,IsObject,IsString } from "class-validator";
+import { IsArray,IsDate,IsEnum,IsNumber,IsObject,IsOptional,IsString } from "class-validator";
 import { ProyectosRegistro } from "../../proyectos-registros/schema/proyectos-registro.schema";
 import { EtapaOtorgamientoDto } from "./etapa-otorgamiento.dto";
 import { EtapaResolucionDto } from "./etapa-resolucion.dto";
 import { EtapaJustificacionDto } from "./etapa-justificacion.dto";
 import { EtapaCierreDto } from "./etapa-cierre.dto";
 import { ConvocatoriaRegistro } from "../../convocatoria-registro/schema/convocatoria-registro.schema";
-import { EtapaSolicitudDto } from "./etapa-solicitud.dto";
 
 export enum Estados {
     SOLICITUD = 'solicitud',
@@ -31,10 +30,6 @@ financiador:ConvocatoriaRegistro
 @IsObject()
 proyecto: ProyectosRegistro; 
 
-@ApiProperty({example:"R-0001-20230912"})
-@IsString()
-codigoInterno:string;
-
 @ApiProperty({example:"Jesus Rivera"})
 @IsString()
 responsable:string
@@ -44,8 +39,8 @@ responsable:string
 fechaPropuesta:Date;
 
 @ApiProperty({example:"12345"})
-@IsNumber()
-numeroTramite:number;
+@IsString()
+numeroTramite:string;
 
 @ApiProperty({example:"f459239"})
 @IsString()
@@ -53,7 +48,8 @@ numeroExpediente:string;
 
 @ApiProperty({example:"PDF"})
 @IsString()
-reciboOficial:string;
+@IsOptional()
+reciboOficial?:string;
 
 @ApiProperty({ example: "Etapa Resolucion" })
 @IsArray()

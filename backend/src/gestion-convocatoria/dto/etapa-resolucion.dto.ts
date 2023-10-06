@@ -29,6 +29,6 @@ notas:string;
 
 @ApiProperty({example:"PDF"})
 @IsString()
-adjuntarResolucion:string;
+adjuntarResolucion?:string;
 
 }

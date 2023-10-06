@@ -25,7 +25,7 @@ ultimoPagoPorcentaje:number;
 
 @ApiProperty({example:"PDF"})
 @IsString()
-documentoCierre:string;
+documentoCierre?:string;
 
 
 }

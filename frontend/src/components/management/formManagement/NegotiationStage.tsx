@@ -15,25 +15,46 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { CardContent } from '@/components/ui/card'
+import { Textarea } from '@/components/ui/textarea'
+import { AxiosResponse } from 'axios'
+import { updateGestion } from '@/services/gestion'
 
 const negotationSchema = z.object({
-  resolucionprovisional: z.date().optional(),
-  limitedeentrega: z.date().optional(),
-  realdeentrega: z.date().optional(),
-  limiterespuesta: z.date().optional(),
-  realrespuesta: z.date().optional(),
-  resolucion: z.string().optional()
+  _id: z.string().optional(),
+  fechaResolucion: z.date(),
+  fechaLimiteEntrega: z.date(),
+  fechaRealEntrega: z.date(),
+  fechaLimiteResponder: z.date(),
+  fechaRealRespuesta: z.date(),
+  notas: z.string(),
+  adjuntarResolucion: z.string().optional()
 })
 
 type NegotationValues = z.infer<typeof negotationSchema>;
 
-function NegotationStage () {
+function NegotationStage ({ id }: { id: string }) {
   const form = useForm<NegotationValues>({
     resolver: zodResolver(negotationSchema)
   })
 
-  function onSubmit (data: NegotationValues) {
-    console.log(data)
+  async function onSubmit (data: NegotationValues) {
+    try {
+      const negotationData = {
+        etapaResolucion: {
+          fechaResolucion: data.fechaResolucion,
+          fechaLimiteEntrega: data.fechaLimiteEntrega,
+          fechaRealEntrega: data.fechaRealEntrega,
+          fechaLimiteResponder: data.fechaLimiteResponder,
+          fechaRealRespuesta: data.fechaRealRespuesta,
+          notas: data.notas,
+          adjuntarResolucion: data.adjuntarResolucion
+        }
+      }
+      const response: AxiosResponse = await updateGestion(id, negotationData)
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
     toast({
       title: '¡Genial!',
       description: 'Acaba de actualizar su formulario.'
@@ -47,7 +68,7 @@ function NegotationStage () {
           <CardContent>
             <FormField
               control={form.control}
-              name='resolucionprovisional'
+              name='fechaResolucion'
               render={({ field }) => (
                 <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
                   <div className='my-2'>
@@ -65,7 +86,7 @@ function NegotationStage () {
             />
             <FormField
               control={form.control}
-              name='limitedeentrega'
+              name='fechaLimiteEntrega'
               render={({ field }) => (
                 <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
                   <div className='my-2'>
@@ -83,7 +104,7 @@ function NegotationStage () {
             />
             <FormField
               control={form.control}
-              name='realdeentrega'
+              name='fechaRealEntrega'
               render={({ field }) => (
                 <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
                   <div className='my-2'>
@@ -101,7 +122,7 @@ function NegotationStage () {
             />
             <FormField
               control={form.control}
-              name='limiterespuesta'
+              name='fechaLimiteResponder'
               render={({ field }) => (
                 <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
                   <div className='my-2'>
@@ -118,7 +139,7 @@ function NegotationStage () {
               )}
             /> <FormField
               control={form.control}
-              name='realrespuesta'
+              name='fechaRealRespuesta'
               render={({ field }) => (
                 <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
                   <div className='my-2'>
@@ -134,10 +155,25 @@ function NegotationStage () {
                 </FormItem>
               )}
                />
+            <FormField
+              control={form.control}
+              name='notas'
+              render={({ field }) => (
+                <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
+                  <div className='my-2'>
+                    <FormLabel className='mb-2'>Notas</FormLabel>
+                    <FormControl>
+                      <Textarea placeholder='Escriba aquí...' {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </div>
+                </FormItem>
+              )}
+            />
             <Separator className='my-5' />
             <FormField
               control={form.control}
-              name='resolucion'
+              name='adjuntarResolucion'
               shouldUnregister
               render={({ field }) => (
                 <FormItem className='w-1/2 px-4 mb-4'>

@@ -6,7 +6,8 @@ import { EtapaOtorgamientoDto } from "../dto/etapa-otorgamiento.dto";
 import { EtapaJustificacionDto } from "../dto/etapa-justificacion.dto";
 import { EtapaCierreDto } from "../dto/etapa-cierre.dto";
 import { Estados } from "../dto/create-gestion-convocatoria.dto";
-import { EtapaSolicitudDto } from "../dto/etapa-solicitud.dto";
+import { Optional } from "@nestjs/common";
+
 
 
 export type GestionDocument = HydratedDocument<GestionConvocatoria>;
@@ -33,9 +34,21 @@ codigoInterno:string;
 @Prop()
 responsable:string
 
-@ApiProperty({example:"Etapa solicitud"})
-@Prop({type:EtapaSolicitudDto})
-etapaSolicitud:EtapaSolicitudDto
+@ApiProperty({example:"20/9/2023"})
+@Prop()
+fechaPropuesta:Date;
+
+@ApiProperty({example:"12345"})
+@Prop()
+numeroTramite:string;
+
+@ApiProperty({example:"f459239"})
+@Prop()
+numeroExpediente:string;
+
+@ApiProperty({example:"PDF"})
+@Prop()
+reciboOficial?:string | null;
 
 @ApiProperty({example:"Etapa Resolucion"})
 @Prop({type:EtapaResolucionDto})

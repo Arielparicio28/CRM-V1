@@ -55,7 +55,11 @@ interface EtapaSolicitud {
     financiador: string;
     proyecto: string;
     responsable: string;
-  etapaSolicitud: EtapaSolicitud[]
+    fechaPropuesta: Date;
+    numeroTramite: string;
+    numeroExpediente: string;
+   reciboOficial?: string;
+   etapaResolucion: EtapaResolucion[];
 /* 
     codigoInterno?: string;
     etapaResolucion: EtapaResolucion[];

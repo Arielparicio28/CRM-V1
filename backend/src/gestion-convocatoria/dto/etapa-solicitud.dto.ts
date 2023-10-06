@@ -17,7 +17,7 @@ numeroExpediente:string;
 
 @ApiProperty({example:"PDF"})
 @IsString()
-reciboOficial:string;
+reciboOficial?:string;
 
 
 }

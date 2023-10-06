@@ -13,11 +13,11 @@ fechaCierre:Date;
 fechaResolucion: Date;
 periodoEjecucion: number;
 fechaJustificacion: Date;
-auditoria?: boolean;
+auditoria?: string;
 presupuesto: number;
 otraInformacion: string;
-memoriaTecnica?: string| void;
-modeloPresupuesto?: string| void;
-formularioSolicitud?: string| void;
-otraDocumentacion?:string | void;
+memoriaTecnica?: File;
+modeloPresupuesto?: File;
+formularioSolicitud?: File;
+otraDocumentacion?:File;
 }

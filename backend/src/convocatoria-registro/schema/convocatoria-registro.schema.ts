@@ -55,7 +55,7 @@ export class ConvocatoriaRegistro extends Document {
 
   @ApiProperty({ example: '5 meses' })
   @Prop()
-  periodoEjecucion: string;
+  periodoEjecucion: number;
 
   @ApiProperty({ example: '8/11/2023' })
   @Prop()

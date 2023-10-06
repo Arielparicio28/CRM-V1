@@ -29,7 +29,6 @@ import { toast } from '../ui/use-toast'
 import { Separator } from '../ui/separator'
 
 const schema = z.object({
- /*  _id: z.string().optional(), */
   titulo: z.string().min(3).max(50),
   tematica: z.string().min(3).max(50),
   entidadConvocante: z.string().min(3).max(50),
@@ -43,7 +42,7 @@ const schema = z.object({
   fechaResolucion: z.date(),
   fechaJustificacion: z.date(),
   periodoEjecucion: z.coerce.number().min(1),
-  auditoria: z.boolean().optional(),
+  auditoria: z.string().optional(),
   presupuesto: z.coerce.number().min(0),
   otraInformacion: z.string(),
   memoriaTecnica: z.instanceof(File).optional(),
@@ -365,6 +364,7 @@ function MainNewCall () {
                 <FormField
                   control={form.control}
                   name='memoriaTecnica'
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
                   render={({ field: { value, onChange, ...field } }) => (
                     <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
                       <div className='my-2'>
@@ -372,9 +372,11 @@ function MainNewCall () {
                         <FormControl>
                           <Input
                             {...field}
-                            value={value?.fileName}
                             onChange={(event) => {
-                              onChange(event.target.files[0])
+                              const selectedFile = event.target.files?.[0]
+                              if (selectedFile) {
+                                onChange(selectedFile)
+                              }
                             }}
                             type='file'
                             id='memoriaTecnica'
@@ -388,6 +390,7 @@ function MainNewCall () {
                 <FormField
                   control={form.control}
                   name='modeloPresupuesto'
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
                   render={({ field: { value, onChange, ...field } }) => (
                     <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
                       <div className='my-2'>
@@ -395,9 +398,11 @@ function MainNewCall () {
                         <FormControl>
                           <Input
                             {...field}
-                            value={value?.fileName}
                             onChange={(event) => {
-                              onChange(event.target.files[0])
+                              const selectedFile = event.target.files?.[0]
+                              if (selectedFile) {
+                                onChange(selectedFile)
+                              }
                             }}
                             type='file'
                             id='modeloPresupuesto'
@@ -411,6 +416,7 @@ function MainNewCall () {
                 <FormField
                   control={form.control}
                   name='formularioSolicitud'
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
                   render={({ field: { value, onChange, ...field } }) => (
                     <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
                       <div className='my-2'>
@@ -418,9 +424,11 @@ function MainNewCall () {
                         <FormControl>
                           <Input
                             {...field}
-                            value={value?.fileName}
                             onChange={(event) => {
-                              onChange(event.target.files[0])
+                              const selectedFile = event.target.files?.[0]
+                              if (selectedFile) {
+                                onChange(selectedFile)
+                              }
                             }}
                             type='file'
                             id='formularioSolicitud'
@@ -434,6 +442,7 @@ function MainNewCall () {
                 <FormField
                   control={form.control}
                   name='otraDocumentacion'
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
                   render={({ field: { value, onChange, ...field } }) => (
                     <FormItem className='w-full md:w-1/2 lg:w-1/3 px-2'>
                       <div className='my-2'>
@@ -441,9 +450,11 @@ function MainNewCall () {
                         <FormControl>
                           <Input
                             {...field}
-                            value={value?.fileName}
                             onChange={(event) => {
-                              onChange(event.target.files[0])
+                              const selectedFile = event.target.files?.[0]
+                              if (selectedFile) {
+                                onChange(selectedFile)
+                              }
                             }}
                             type='file'
                             id='otraDocumentacion'

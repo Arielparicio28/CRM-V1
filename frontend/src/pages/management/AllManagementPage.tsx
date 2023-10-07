@@ -61,9 +61,11 @@ export default function AllManagementPage () {
         console.error('Error obteniendo los datos:', error)
       })
   }, [])
+  useEffect(() => {
+    // Forzar la actualización del componente cuando `data` cambia
+  }, [data])
   if (!data) return null
   console.log(data)
-
   return (
     <>
       <div>

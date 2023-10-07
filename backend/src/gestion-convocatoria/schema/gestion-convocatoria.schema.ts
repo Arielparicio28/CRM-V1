@@ -6,7 +6,7 @@ import { EtapaOtorgamientoDto } from "../dto/etapa-otorgamiento.dto";
 import { EtapaJustificacionDto } from "../dto/etapa-justificacion.dto";
 import { EtapaCierreDto } from "../dto/etapa-cierre.dto";
 import { Estados } from "../dto/create-gestion-convocatoria.dto";
-import { Optional } from "@nestjs/common";
+
 
 
 
@@ -67,7 +67,7 @@ etapaJustificacion:EtapaJustificacionDto;
 etapaCierre:EtapaCierreDto;  
 
 @ApiProperty({example:'solicitud'})
-@Prop({enum: Estados})
+@Prop({enum: Estados,default:'solicitud'})
 estado: string;
 
 }

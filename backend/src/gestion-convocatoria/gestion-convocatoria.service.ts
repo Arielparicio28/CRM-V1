@@ -1,5 +1,5 @@
 import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException } from "@nestjs/common";
-import { CreateGestionConvocatoriaDto } from "./dto/create-gestion-convocatoria.dto";
+import { CreateGestionConvocatoriaDto, Estados } from "./dto/create-gestion-convocatoria.dto";
 import { UpdateGestionConvocatoriaDto } from "./dto/update-gestion-convocatoria.dto";
 import { InjectModel } from "@nestjs/mongoose";
 import { GestionConvocatoria } from "./schema/gestion-convocatoria.schema";
@@ -97,15 +97,44 @@ export class GestionConvocatoriaService {
       if (!updatedGestion) {
         throw new NotFoundException('Gestión no encontrada');
       }
-  
+     const estadoActual = updatedGestion.estado
+     let nuevoEstado :Estados
+     switch (estadoActual) {
+      case Estados.SOLICITUD:
+        nuevoEstado = Estados.NEGOCIACION;
+        break;
+      case Estados.NEGOCIACION:
+        nuevoEstado = Estados.OTORGAMIENTO;
+        break;
+      case Estados.OTORGAMIENTO:
+        nuevoEstado = Estados.JUSTIFICACION;
+        break;
+      case Estados.JUSTIFICACION:
+        nuevoEstado = Estados.CIERRE;
+        break;
+      case Estados.CIERRE:
+        // Ya está en el estado final, no se puede avanzar más
+        throw new Error('La gestión ya está en el estado final');
+      default:
+        throw new Error('Estado desconocido');
+    }
+    console.log('Estado actual:', updatedGestion.estado);
+
+// Lógica de cambio de estado
+
+console.log('Nuevo estado:', nuevoEstado);
+  updatedGestion.estado = nuevoEstado
+  await updatedGestion.save();
       return {
         message: 'Gestión actualizada correctamente',
         status: 200,
-        gestion: updatedGestion,
+        gestion: updatedGestion.estado,
       }
+      
     } catch (error) {
       throw error;
     }
+    
   }
   
 

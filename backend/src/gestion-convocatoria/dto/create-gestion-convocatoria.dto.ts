@@ -70,5 +70,5 @@ etapaCierre:EtapaCierreDto;
 
 @ApiProperty({example:'solicitud'})
 @IsEnum(Estados)
-estado:Estados
+estado:Estados = Estados.SOLICITUD
 }

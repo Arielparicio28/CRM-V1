@@ -1,0 +1,53 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Model } from 'mongoose';
+import { GestionConvocatoria } from './schema/gestion-convocatoria.schema';
+import { Estados } from './dto/create-gestion-convocatoria.dto';
+
+@Injectable()
+export class GestionConvocatoriaService {
+  constructor(
+    private readonly gestionModel: Model<GestionConvocatoria>,
+  ) {}
+
+  // ... otros métodos
+
+  async avanzarEtapa(id: string): Promise<GestionConvocatoria> {
+    const gestion = await this.gestionModel.findById(id).exec();
+
+    if (!gestion) {
+      throw new NotFoundException('Gestión no encontrada');
+    }
+
+    // Obtén el estado actual de la gestión
+    const estadoActual = gestion.estado;
+
+    // Determina el próximo estado en función del estado actual
+    let nuevoEstado: Estados;
+
+    switch (estadoActual) {
+      case Estados.SOLICITUD:
+        nuevoEstado = Estados.NEGOCIACION;
+        break;
+      case Estados.NEGOCIACION:
+        nuevoEstado = Estados.OTORGAMIENTO;
+        break;
+      case Estados.OTORGAMIENTO:
+        nuevoEstado = Estados.JUSTIFICACION;
+        break;
+      case Estados.JUSTIFICACION:
+        nuevoEstado = Estados.CIERRE;
+        break;
+      case Estados.CIERRE:
+        // Ya está en el estado final, no se puede avanzar más
+        throw new Error('La gestión ya está en el estado final');
+      default:
+        throw new Error('Estado desconocido');
+    }
+
+    // Actualiza el estado en el objeto gestion
+    gestion.estado = nuevoEstado;
+
+    // Guarda la gestión actualizada
+    return gestion.save();
+  }
+}

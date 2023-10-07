@@ -23,7 +23,7 @@ proyectoNombre: string;
     
    @ApiProperty({example:"6 meses"})
    @IsString()
-   proyectoDuracion:string;
+   proyectoDuracion:number;
    
    @ApiProperty({example:23000})
    @IsNumber()

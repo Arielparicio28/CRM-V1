@@ -29,7 +29,7 @@ responsable:string;
 
 @ApiProperty({example:"6 meses"})
 @Prop()
-proyectoDuracion:string;
+proyectoDuracion:number;
 
 @ApiProperty({example:23000})
 @Prop()

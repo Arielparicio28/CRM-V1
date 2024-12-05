@@ -16,7 +16,7 @@ export class CreateProyectosRegistroDto {
 
   @ApiProperty({ example: '6 meses' })
   @IsString()
-  proyectoDuracion: number;
+  proyectoDuracion: string;
 
   @ApiProperty({ example: 23000 })
   @IsNumber()

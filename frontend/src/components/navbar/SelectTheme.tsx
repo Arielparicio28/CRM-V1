@@ -1,12 +1,19 @@
+import { useState } from 'react';
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectTrigger,
-  SelectValue} from '../ui/select'
+  SelectValue
+} from '../ui/select'
 
 export function SelectTheme () {
+/*   const [theme, setTheme] = useState('light')
+  const handleThemeChange = (selectedTheme) => {
+    setTheme(selectedTheme)
+    console.log('Tema seleccionado:', selectedTheme) // Para verificar si el estado del tema se actualiza correctamente
+  } */
   return (
     <Select>
       <SelectTrigger className='w-auto border-none p-0'>

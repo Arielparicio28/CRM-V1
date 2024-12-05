@@ -113,15 +113,12 @@ export class GestionConvocatoriaService {
         nuevoEstado = Estados.CIERRE;
         break;
       case Estados.CIERRE:
-        // Ya está en el estado final, no se puede avanzar más
+
         throw new Error('La gestión ya está en el estado final');
       default:
         throw new Error('Estado desconocido');
     }
     console.log('Estado actual:', updatedGestion.estado);
-
-// Lógica de cambio de estado
-
 console.log('Nuevo estado:', nuevoEstado);
   updatedGestion.estado = nuevoEstado
   await updatedGestion.save();
